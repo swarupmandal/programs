@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 
 import com.reflection.Student;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class PrivateField {
 
 	public String getPrivateField(Student student) throws Exception {
@@ -20,6 +21,7 @@ public class PrivateField {
 		return name;
 	}
 
+	
 	public void getPrivateMethod(Student student) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
 		
 		Class clazz = student.getClass();
@@ -31,7 +33,7 @@ public class PrivateField {
 		
 		Method method = clazz.getDeclaredMethod("test", String.class, int.class);
 		method.setAccessible(true);
-		method.invoke(student, "cts",2);
+		method.invoke(student, "intans",2);
 		
 		
 	}

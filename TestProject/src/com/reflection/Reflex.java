@@ -1,13 +1,8 @@
 package com.reflection;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-
-import com.compare.test.Employee;
 import com.reflection.privateAccess.PrivateField;
 
-import sun.reflect.Reflection;
+
 
 
 public class Reflex {
@@ -19,14 +14,14 @@ public class Reflex {
 		Student student;
 		PrivateField field;
 		try {
-			/*student =reflex1();
+			student =reflex1();
 			field = new PrivateField();
 			String name = field.getPrivateField(student);
-			System.out.println("CITY >>> >> > "+name);*/
+			System.out.println("CITY >>> >> > "+name);
 			
-			/*student = reflexMethods();
+			student = reflexMethods();
 			field = new PrivateField();
-			field.getPrivateMethod(student);*/
+			field.getPrivateMethod(student);
 			
 			field = new PrivateField();
 			field.getPrivateConstructor();
@@ -38,7 +33,7 @@ public class Reflex {
 		
 	}
 	
-	/*public static Student reflex1() {
+	public static Student reflex1() {
 		
 		Student student = new Student();
 		student.setName("Calcutta");
@@ -55,7 +50,7 @@ public class Reflex {
 		
 		Student student = new Student();
 		return student;
-	}*/
+	}
 
 
 }
