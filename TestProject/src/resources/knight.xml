@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/ 
+	spring-beans-2.0.xsd"> -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:myns="http://www.mycompany.com/schema/myns"
+	xsi:schemaLocation="
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+http://www.mycompany.com/schema/myns http://www.mycompany.com/schema/myns/myns.xsd">
+
+	<bean id="quest2" class="org.spr.dip.HolyGrailQuest"></bean>
+	
+	<bean id= "night" class="org.spr.dip.KnightOfTheRoundtable">
+	
+		<constructor-arg value="Bedivere"></constructor-arg>
+		<property name="quest2" ref="quest2"></property>
+	</bean>
+
+
+
+</beans>
