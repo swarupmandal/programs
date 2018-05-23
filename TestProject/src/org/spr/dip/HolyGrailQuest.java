@@ -4,7 +4,7 @@ public class HolyGrailQuest implements Quest{
 	
 	public HolyGrail embark(){
 		HolyGrail holyGrail = null;
-		
+		System.out.println("HOLY GRAIL");
 		//
 		//
 		//
