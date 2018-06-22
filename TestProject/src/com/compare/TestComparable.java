@@ -5,7 +5,7 @@ import java.util.Collections;
 
 public class TestComparable {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) {/*
 
 		Student student = new Student();
 			student.setAge(30);
@@ -34,10 +34,10 @@ public class TestComparable {
 			
 			Collections.sort(al);
 			
-			/*System.err.println("Sort Using Comparable ::");
+			System.err.println("Sort Using Comparable ::");
 			for(Student st:al){
 				System.out.println("Age=>"+st.age+" Name=>"+st.name+" Roll=>"+st.roll);
-			}*/
+			}
 			
 			System.err.println("Sort Using Name Comparator ::");
 			Collections.sort(al, Student.nameComparator);
@@ -63,6 +63,29 @@ public class TestComparable {
 				System.out.println("Age=>"+st.age+" Name=>"+st.name+" Roll=>"+st.roll+" Salary=>"+st.salary);
 			}
 			
+	*/
+		
+	
+		ArrayList<Employee> list = new ArrayList<>();
+		list.add(new Employee(1, "A", true));
+		list.add(new Employee(2, "B", false));
+		list.add(new Employee(3, "C", true));
+		list.add(new Employee(4, "D", false));
+		list.add(new Employee(5, "E", true));
+		list.add(new Employee(6, "F", false));
+		list.add(new Employee(7, "G", true));
+		list.add(new Employee(8, "H", false));
+		list.add(new Employee(9, "I", true));
+		list.add(new Employee(10,"J", false));
+		
+	
+		Collections.sort(list, new EmployeeComparator(true));
+	
+		for(Employee e : list){
+			System.out.println(e);
+			System.out.println("------------------------------------------------------");
+		}
+	
 	}
 
 }
