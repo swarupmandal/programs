@@ -1,11 +1,10 @@
 package com.sort;
 
 import java.util.*;
-import java.io.*;
 
 public class BinarySerach {
 
-	@SuppressWarnings("static-access")
+	@SuppressWarnings({ "unused" })
 	public static void main(String[] args) {
 
 		int arr[] = { 25, 65, 12, 22, 11, 27, 9, 10, 24 };
@@ -46,12 +45,19 @@ public class BinarySerach {
 
 		// int c = search.substrCount();
 		// System.out.println(c);
-		/*String str = "alkjhfoiujweifbadljsdnvcAkdsjfhWEOUqeeiurypqjdkjnnzzvnajoOkjsdifUfi";
-		String v = "aeiouAEIOUjJ";
-		String nv = removeString(str, v);
-		System.out.println(nv);*/
 		
-		swapArray();
+		 // String str ="alkjhfoiujweifbadljsdnvcAkdsjfhWEOUqeeiurypqjdkjnnzzvnajoOkjsdifUfi"; 
+		  //String v = "aeiouAEIOUjJ"; 
+		  //String nv = removeString(str, v);
+		  //System.out.println(nv);
+		 
+
+		//swapArray();
+		BinarySerach bs = new BinarySerach();
+		//bs.substrCount();
+		//bs.arrayMarging1(arr, arr3);
+		bs.rotate(arr2, arr2.length, 5);
+		
 	}
 
 	// ABCABC
@@ -239,6 +245,12 @@ public class BinarySerach {
 
 		}
 
+		int c = 0;
+		for (int i : arr) {
+			c = c + 1;
+			System.out.print(i + ((arr.length > c) ? ", " : ""));
+		}
+		
 		for (int i = 0; i < arr.length; i++) {
 			int m_idx = i;
 			for (int j = i + 1; j < arr.length; j++) {
@@ -250,11 +262,11 @@ public class BinarySerach {
 			arr[m_idx] = arr[i];
 			arr[i] = temp;
 		}
-
-		int c = 0;
+		System.out.println();
+		int cc = 0;
 		for (int i : arr) {
-			c = c + 1;
-			System.out.print(i + ((arr.length > c) ? ", " : ""));
+			cc = cc + 1;
+			System.out.print(i + ((arr.length > cc) ? ", " : ""));
 		}
 
 	}
@@ -295,8 +307,7 @@ public class BinarySerach {
 		}
 
 		int c = 0;
-		System.out
-				.println("25, 65, 12, 22, 11, 27, 9, 10, 24, 15, 18, 2, 3, 6");
+		System.out.println("25, 65, 12, 22, 11, 27, 9, 10, 24, 15, 18, 2, 3, 6");
 		for (int i : arr) {
 			c = c + 1;
 			System.out.print(i + ((al.size() > c) ? ", " : ""));
@@ -338,8 +349,7 @@ public class BinarySerach {
 
 		char[] chStr = str.toCharArray();
 
-		char[] ch = v.toCharArray(); // {'a',
-										// 'e','i','o','u','A','E','I','O','U'};
+		char[] ch = v.toCharArray(); // {'a', 'e','i','o','u','A','E','I','O','U'};
 		ArrayList<Character> vList = new ArrayList<Character>();
 		for (int i = 0; i < ch.length; i++) {
 			vList.add(ch[i]);
@@ -372,26 +382,33 @@ public class BinarySerach {
 		}
 		System.out.println(sb);
 
-		/*
-		 * String v = "aeiouAEIOU"; String nv = str.replaceAll("a", ""); nv =
-		 * nv.replace("e", ""); nv = nv.replace("i", ""); nv = nv.replace("o",
-		 * ""); nv = nv.replace("u", ""); nv = nv.replace("A", ""); nv =
-		 * nv.replace("E", ""); nv = nv.replace("I", ""); nv = nv.replace("O",
-		 * ""); nv = nv.replace("U", ""); System.out.println("Str2 >>> >> > " +
-		 * nv);
-		 */
+		/*String v = "aeiouAEIOU";
+		String nv = str.replaceAll("a", "");
+		nv = nv.replace("e", "");
+		nv = nv.replace("i", "");
+		nv = nv.replace("o", "");
+		nv = nv.replace("u", "");
+		nv = nv.replace("A", "");
+		nv = nv.replace("E", "");
+		nv = nv.replace("I", "");
+		nv = nv.replace("O", "");
+		nv = nv.replace("U", "");
+		System.out.println("Str2 >>> >> > " + nv);*/
+
 		// lkjhfjwfbdljsdnvckdsjfhW
 	}
 
 	public static String removeString(String str, String v) {
 		String str1 = "";
 
-		/*
-		 * for(int i=0; i<str.length(); i++){ if(!isVoiwel(str.charAt(i), v)){
-		 * str1= str1+str.charAt(i); } } return str1;
-		 */
+		for (int i = 0; i < str.length(); i++) {
+			if (!isVoiwel(str.charAt(i), v)) {
+				str1 = str1 + str.charAt(i);
+			}
+		}
+		return str1;
 
-		return str1 = str.replaceAll("[aeioujAEIOUJ]", "");
+		// return str1 = str.replaceAll("[aeioujAEIOUJ]", "");
 	}
 
 	public static boolean isVoiwel(char ch, String voiwels) {
@@ -407,7 +424,7 @@ public class BinarySerach {
 	public static void swapArray() {
 		int arr1[] = { 1, 2, 3, 4, 5, 6, };
 		int arr2[] = { 10, 11, 12, 13, 14, 15 };
-		//int arr[] = new int[arr1.length];
+		// int arr[] = new int[arr1.length];
 
 		for (int i = 0; i < arr1.length; i++) {
 			if (arr1.length == arr2.length) {
@@ -417,24 +434,22 @@ public class BinarySerach {
 			}
 		}
 		System.out.print("arr1 >>> > > ");
-		for(int i=0;i<5; i++){
-			
-			System.out.print(arr1[i]+((5>i+1)?",":""));
+		for (int i = 0; i < 5; i++) {
+
+			System.out.print(arr1[i] + ((5 > i + 1) ? "," : ""));
 		}
 		System.out.println();
 		System.out.print("arr2 >>> > > ");
-		for(int i=0;i<5; i++){
-			System.out.print(arr2[i]+((5>i+1)?",":""));
+		for (int i = 0; i < 5; i++) {
+			System.out.print(arr2[i] + ((5 > i + 1) ? "," : ""));
 		}
-		
+
 	}
 
-	public static void swapArrayPos(){
-		
-		char[] arr = {'a','b','c','e','f','g'};
-		
-		
-		
+	public static void swapArrayPos() {
+
+		char[] arr = { 'a', 'b', 'c', 'e', 'f', 'g' };
+
 	}
-	
+
 }
