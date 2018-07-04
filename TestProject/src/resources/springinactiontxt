@@ -69,7 +69,7 @@
 			         
 7. page 41 - > 		The <bean/> element is the most basic Configuration unit in spring framework. It tells spring to create an object of them.
 
-			         <bean id="duke" class="com.springinaction.springidol.Juggler" />
+			         <bean id="duke" class="com.springinaction.springidol.Juggler"/>
 					
 					The id attribute gives a name by which supply reference to the spring container.		
 							
