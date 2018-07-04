@@ -15,7 +15,7 @@ public class TestComparable {
 			
 		Student student1 = new Student();
 			student1.setAge(20);
-			student1.setName("lcc");
+			student1.setName("llcc");
 			student1.setRoll(815);
 			student1.setSalary(815.36);
 			
