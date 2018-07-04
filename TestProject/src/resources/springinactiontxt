@@ -71,7 +71,35 @@
 
 			         <bean id="duke" class="com.springinaction.springidol.Juggler"/>
 					
-					The id attribute gives a name by which supply reference to the spring container.		
+					The id attribute gives a name by which supply reference to the spring container.
+					
+8. page 45 - > Constructor or setter injection: how do you choose?
+			 	
+			   > Spring doesn't take side of either constructor or setter injection. We can also mix constructor and setter in a single bean.
+			     but I found when the dependencies are strict we can choose constructor di and when dependencies or properties are not
+			     fixed in object creation then we should go for setter injection.
+			     
+9. page 48 - > In case of constructor dependency injection
+			   spring is doing as
+			   int a;
+			   Food food;
+			   
+			   Animal animal = new Cat(a, food);
+			   
+			   
+			   In case of setter dependency injection
+			   Spring first read the name of the value and on that it is calling its setter method and injecting the value.before injecting its value
+			   spring converts type of the value as the property type and after that it inject.
+			   
+			   Cat cat = new Cat();
+			   cat.setA(1);
+			   
+			   The main difference between java setter and spring setter is
+			   Spring is doing it in decoupled way. we can change the value as many time required but in case of java setter to change value need to
+			   change manually in java class.
+			   
+10.			   
+			     							
 							
 							
 							

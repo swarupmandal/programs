@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:myns="http://www.mycompany.com/schema/myns"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+	http://www.mycompany.com/schema/myns http://www.mycompany.com/schema/myns/myns.xsd">
+	
+	<bean id="kenny" class="org.spr.model.Instrumentalist">
+		<property name="song" value="My heart will go on..."></property>
+		<property name="instrument" ref="guiter"></property>
+	</bean>
+	
+	<bean id="piano" class="org.spr.model.Piano"></bean>
+	<bean id="guiter" class="org.spr.model.Guiter"></bean>
+	
+</beans>

@@ -66,7 +66,7 @@ public class TestComparable {
 	*/
 		
 	
-		ArrayList<Employee> list = new ArrayList<>();
+		/*ArrayList<Employee> list = new ArrayList<>();
 		list.add(new Employee(1, "A", true));
 		list.add(new Employee(2, "B", false));
 		list.add(new Employee(3, "C", true));
@@ -84,7 +84,7 @@ public class TestComparable {
 		for(Employee e : list){
 			System.out.println(e);
 			System.out.println("------------------------------------------------------");
-		}
+		}*/
 	
 	}
 
