@@ -1,0 +1,87 @@
+1. AOP DEF - > Aspect oriented programming is a programming technique that promotes separation of concerns within a software system.
+
+2. page 35 - > BeanFactory beanFactory = new XmlBeanFactory("c:/beans.xml");
+			   This simple line of code tells the BeanFactory to load the xml file and read bean definitions from the xml file.But it
+			   doesn't instantiate beans immediately means when read xml beans are lazily loaded into BeanFactory. Means while
+			   load xml immediately the beans doesn't load themselves until it is needed.
+			   To get bean object from BeanFactory we have to call getBean() method. then BeanFactory will instantiates and dispense
+			   bean objects with bean properties using DI and start life cycle of of the bean within Spring Container.    
+			  	
+
+3. page 36 - > [Difference] - A BeanFactory is fine for Small applications but to get original power we have to use ApplicationContext.
+			   On the surface an ApplicationContext is much same as BeanFacory. Both load xml read definition collaborating beans
+			   and dispense them when request comes. But ApplicationContext provide more advanced features
+			 
+			   i)   It supports functionality to resolve textual messages and support Internationalization.
+			   ii)  It provides generic way to load file resources.
+			   iii) It publish events to beans which are registered as listeners.
+			   iv)  Another big difference is how singleton beans are loaded. BeanFactory loads all beans lazyli means when it read and load xml it doesn't instantiate
+			   		all beans, its instantiate when request come.
+					But ApplicationContext is bit intelligent it loads all the singleton beans upon context startups. So if any singleton bean
+					will require in application then application doesn't need to wait to instantiate of that singleton bean.
+					 			   		 
+			 
+4. page 37 - > There are normally three types of ApplicationContext is commonly used
+			 
+			   i)   ClassPathXmlApplicationContext  -> Loads a context definition from ClassPath.
+			   ii)  FileSystemXmlApplicationContext ->	Loads Context definition from FileSystem.
+			   iii) XmlWebApplicationContext -> Loads a context File that contained in a web application.
+			 
+5. 			   The difference between is that FileSystemXmlApplicationContext will find xml file in the particular location of the file system.
+			   And ClassPathXmlApplicationContext will find xml file anywhere in the class path including jar files.
+			   
+
+6. page 38 - > Beans Life of beans scope.
+
+			   A BeanFactory performs several setup steps before it is ready to use.
+			   
+			   Instantiate > Populate Properties > BeanNameAware's setBeanName() > BeanFactoryAwre's setBeanFactory() > 
+			   
+			   PreinitializationBeanPostProcessor > Initializing Bean AfterPropertiesSet() > Call Custom init method >
+			   
+			   PostInitializationBeanPostProcessor >[Bean is ready to use] ----> [Container is SuhtDown] >
+			   
+			   Disposable Bean Destroy() >call custom destroy method
+			   
+			   
+			   STEPS TAKEN IN THE LIFECYCLE OF THE BEAN
+			   
+			   i)    Instantiate - > Spring instantiate the bean
+			   
+			   ii)   Populate Properties - > Spring injects the beans properties.
+			   
+			   iii)  Set Bean Name - > If the bean implements BeanNameAwre, Spring passes id to set beanName();
+			   
+			   iv)   Set bean Factory - > If the bean implements BeanFactoryAwre then spring passes the
+			   		 beanFactory to setBeanFactory
+			   		 
+			   v)	 PostProcessor(before initialization) - > if there are any BeanPostProcessor bean calls there
+			    	 postProcessorBeforeInitialization method.
+			    	 
+			   vi)   Initialize beans - > if a bean implements InitializingBean, afterPropertiesSet() will be called, if
+			    	 any other custom init method declared then that method will be called.
+			    
+			   vii)  Postprocess After initialization -> If there is any BeanPostProcessors then Spring will called postProcessAfterInitialization()
+			    
+			  viii)	 Bean Is Ready to use - > At this point bean is ready to use and if it is not called from anywhere in application then
+			         it will remain same.	 
+			         
+			         
+7. page 41 - > 		The <bean/> element is the most basic Configuration unit in spring framework. It tells spring to create an object of them.
+
+			         <bean id="duke" class="com.springinaction.springidol.Juggler" />
+					
+					The id attribute gives a name by which supply reference to the spring container.		
+							
+							
+							
+							
+					         
+			    	 
+			    
+			   	
+
+			
+			   		   
+			     	 
+			   
