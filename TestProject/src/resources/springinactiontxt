@@ -79,6 +79,26 @@
 			     but I found when the dependencies are strict we can choose constructor di and when dependencies or properties are not
 			     fixed in object creation then we should go for setter injection.
 			     
+			    <!-- Setter Injection -->
+			      
+			    <bean id="kenny" class="org.spr.model.Instrumentalist">
+					<property name="song" value="My heart will go on..."></property>
+					<property name="instrument" ref="guiter"></property>
+				</bean>
+	
+				<bean id="piano" class="org.spr.model.Piano"></bean>
+				<bean id="guiter" class="org.spr.model.Guiter"></bean>
+			     
+			    <!-- constructor Injection -->
+			     
+			    <bean id = "kenny" class = "">
+			    	<constructor-args value ="15"/>
+			    	<constructor-args ref ="guiter"
+			    
+			    </bean>  
+			    <bean id="guiter" class="org.spr.model.Guiter"></bean> 
+			     
+			     
 9. page 48 - > In case of constructor dependency injection
 			   spring is doing as
 			   int a;
@@ -98,11 +118,32 @@
 			   Spring is doing it in decoupled way. we can change the value as many time required but in case of java setter to change value need to
 			   change manually in java class.
 			   
-10.			   
-			     							
+10.	page 52 -> inner bean
+
+			   If we want to restrict any bean object to only one bean then we go for inner bean concept. here the reference of the bean is not available
+			   to other beans. So the disadvantage is it is not reusable. Inner beans are only useful for injection only one class and can't be referred to
+			   by others.
+			   
+			   <bean id= "kenny" value = "org.spr.model.Instrumentalist">
+			   		<property name = "song" value = "Too Too Too.."/>
+			   		<property name = "instrument">
+			   			<bean class = "org.spr.model.Piano"/>
+			   		</property>	
+			   </bean>  
+			   			   
+			   <bean id= "kenny" value = "org.spr.model.Instrumentalist">
+			   		<constructor-args value = "15"/>
+			   		<constructor-args>
+			   			<bean class = "org.spr.model.Piano"/>
+			   		</constructor-args>	
+			   </bean>    							
 							
 							
-							
+11. page 52 -> wiring collections
+
+
+			
+			   							
 							
 					         
 			    	 
