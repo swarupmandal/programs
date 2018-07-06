@@ -141,8 +141,42 @@
 							
 11. page 52 -> wiring collections
 
+12. page 58 -> Autowiring
 
-			
+			   primitive types are not auto wiring.
+
+		       In case of large application explicit autowiring will need to write a lot of xmls. Spring can automatically figure out how to wire beans
+		       together by setting the autowire properties on each <bean/> that need to autowire by spring.
+		       
+		       four types of autowiring is there
+		       
+		       i)   byName - Attempts to find the name(or id) of the bean in the container whose name will be matched with the name of the property
+		                     is being matched. If no matching name is found then the bean will unwired.
+		                    
+			   ii)  byType - Attempting to find a single bean in the container with the same type that is being wired with the property. If no matching
+			                 found it will unwired. If more than one bean of same type found it will throw UnsatisfiedDependencyException.
+			                 
+			   iii) constructor - Tries to match up with multiple beans with bean properties defined. if more than one same constructor found
+			                      then UnsatisfiedDefinitionException will throw.
+			                      
+			   iv) autoDetect - Attempts to autowired by constructor first after that byType.                                 
+			   
+
+   page 59 - Autowiring byName -
+   			 
+   			 <bean id="kenny" class="com.springinaction.springidol.Instrumentalist" autowire="byName">
+				<property name="song" value="Jingle Bells" />
+			 </bean>
+			 
+			 <bean id="instrument" class="com.springinaction.springidol.Saxophone" />
+			 
+			 byName is having one limitation if multiple bean is having the same name then all bean will treat as same. but it is very rare.
+			 
+			 
+   			 Autowiring byType -
+   			 
+   			 
+   			 			
 			   							
 							
 					         
