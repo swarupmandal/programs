@@ -175,12 +175,45 @@
 			 
    			 Autowiring byType -
    			 
+   			 In case of ambiguity spring will not guess the proper bean it will throw an exception.
+   			 if many classes implements one interface then bytype autowiring will throw exception.
+   			 
+   			 
+   			 
+   			 Using constructor autowiring -
+   			 
+   			 Autowiring by constructor shares the same limitations as byType. That is,
+			 Spring will not attempt to guess which bean to autowire when it finds multiple
+			 beans that match a constructor’s arguments. Furthermore, if a constructor has
+			 multiple constructors, any of which can be satisfied by autowiring, Spring will not
+		     attempt to guess which constructor to use.
+   			 
+   			 Autodetect autowiring
+   			 
+   			 If you want to autowire your beans, but you can’t decide which type of autowiring
+			 to use, have no fear. By setting the autowire attribute to autodetect.
+			 When a bean has been configured to autowire by autodetect, Spring will attempt
+		     to autowire by constructor first. If a suitable constructor-bean match can’t be
+             found then Spring will attempt to autowire by type
    			 
    			 			
-			   							
+			 If we want same auto wiring for all beans then we can go for auto-detect autowiring.
+			 
+			 <beans default-autowire="byName">
+			
+			 </beans>  							
 							
 					         
-			    	 
+13. Controlling Bean Creation ->
+				
+			  i)   Control how many instances of a specific bean will create, whether it will create a single bean through out the application
+			       or it will create a new instance for every request or a new instance each time you use.
+			   
+			  ii)  Create bean from static factory method instead of constructor.
+			  
+			  iii) Initializing after it is created and clean up just before destroying.
+			  
+14. Bean Scoping - > By default all spring beans are singleton.Means when a container dispense a bean it will always exact same bean everytime.			   				    	 
 			    
 			   	
 

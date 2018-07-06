@@ -14,10 +14,10 @@ public class OneManBrand implements Performer {
 	@Override
 	public void perform() {
 		
-		System.out.println(name + "Is playing");
+		System.out.println(name + " Is playing");
 		
 		for(Instrument instrument : instruments){
-			System.out.println(instrument);
+			instrument.play();
 		}
 		
 	}
