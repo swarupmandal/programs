@@ -9,8 +9,8 @@ public class MainClass {
 	public static void main(String[] args) {
 		
 		//ApplicationContext applicationContext = new ClassPathXmlApplicationContext("/resources/juggler.xml");
-		ConfigurableApplicationContext ca = new ClassPathXmlApplicationContext("/resources/onemanbrand.xml");
-		Performer performer = (Performer) ca.getBean("hank");
+		ConfigurableApplicationContext ca = new ClassPathXmlApplicationContext("/resources/magician.xml");
+		Performer performer = (Performer) ca.getBean("harry");
 		performer.perform();
 	}
 }

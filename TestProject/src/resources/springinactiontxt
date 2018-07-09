@@ -271,7 +271,7 @@
 					…
 				</beans>
 				
-17. InitializingBean and DisposableBean page 69 - > Its a special kind of Interface when a class implements this interface class needs to
+17. page 69 - InitializingBean and DisposableBean - > Its a special kind of Interface when a class implements this interface class needs to
 													override afterPropertiesSet() method and destroy() method.
 													And spring container confirms that it will perform init method after setting all of its properties.
 													
@@ -281,7 +281,66 @@
 													But normally it is not recommended because it will create coupling.
 													
 													
+													
+													
+													
+															CHAPTER 3
+														   -----------
+														   
+
+
+1. page 75 - Declaring parent and child beans - >
+
+			 parent - indicates the id of a <bean/> that will be the parent of the <bean/> with the parent attribute.
+			 
+			 abstract - If it set true then the bean become abstract and it never be instantiated in by spring.
+			 
+			 
+			 Inheritance helps to keep common properties in a parent bean and other beans should extends that parent bean. and help sub beans to less code.
+			 
+			 <bean id = "baseSaxophonist" class = "...Instrumentalist" abstract = "true">
+			 	<property-name = "song" value = "Jingle bale"/>
+			 	<property-name = "instrument" ref = "guitar"/>
+			 </bean>
+			 
+			 <bean id = "kenny" parent = "baseSaxophonist"/>
+			 <bean id = "devid" parent = "baseSaxophonist"/>
+			 
+			 //here no class is there
+			 
+			 Here we are using all the properties of parent bean.But if we want to take only few properties we can and also overrides parent properties.
+			 	
+			 <bean id = "frank" parent = "baseSaxophonist">
+			 	<property-name = "song" value = "oh my love"/>
+			 </bean>
+			 
+			 here we overrides the song property.
+			 
+			 
+			  														   
+page 76 - Abstracting common properties - >
+	
+		  It is possible in spring to common properties in a bean with out any type(class).And it acts as a parent class and any types of bean can'
+		  inherit this.
+		  
+		  <bean id = "basePerformer" abstract = "true">
+		  	<property-name = "song" value = "Somewhere over rainbow"/>
+		  </bean>	  																			
 								 					
+		  <bean id = "tailor"
+		        class = "..Vocalist"
+		        parent = "basePerformer"/>
+		        
+		  <bean id = "kenny" class = "..Instrumentalist" parent = "basePerformer">
+		  	<property name="instrument" ref = "guitar"/>
+		  </bean>
+		  
+		  here basePerformer is a parent bean and it is an abstract bean. ant types of beans are extending it.
+		  
+2. page 78 - Applying method injection -> 
+		
+			 	 		  		      
+		        	
 								 					
 								 
 								 				 				 			   				    	 
