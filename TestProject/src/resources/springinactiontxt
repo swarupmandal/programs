@@ -202,18 +202,89 @@
 			 <beans default-autowire="byName">
 			
 			 </beans>  							
-							
-					         
+			 				
+			 		         
 13. Controlling Bean Creation ->
 				
-			  i)   Control how many instances of a specific bean will create, whether it will create a single bean through out the application
-			       or it will create a new instance for every request or a new instance each time you use.
+			 i)   Control how many instances of a specific bean will create, whether it will create a single bean through out the application
+			      or it will create a new instance for every request or a new instance each time you use.
 			   
-			  ii)  Create bean from static factory method instead of constructor.
+			 ii)  Create bean from static factory method instead of constructor.
 			  
-			  iii) Initializing after it is created and clean up just before destroying.
+			 iii) Initializing after it is created and clean up just before destroying.
 			  
-14. Bean Scoping - > By default all spring beans are singleton.Means when a container dispense a bean it will always exact same bean everytime.			   				    	 
+14. page 65 - Bean Scoping - >
+						     By default all spring beans are singleton.Means when a container dispense a bean it will always returns exact same bean every time
+							 whether the bean is creating through wiring or getBean() method.
+							 
+							 To Generate new bean instance each call we have to override the singleton nature of spring.
+							 For that we have to declare bean as scope = "prototype".
+							 
+							 singleton - Scopes the bean definition to single per container (default)
+							 
+							 prototype - Allows the bean to each time new instance.
+							 
+							 session - Scopes a bean definition to an Http session.
+							 
+							 request - Scopes a bean definition per Http request.
+							 
+							 global-session - Scopes a bean definition to global Http session.
+							 
+							 
+							 
+15. page 66 - Creating beans from factory methods - >
+              
+              Normally Spring container instantiating beans through default constructor of bean class.
+              But what happen when we will use a third party bean and that is not having any constructor it is instantiating beans through static factory method.
+              In this case <bean/> is having one attribute
+              factory-method = ""  				 
+    		  here we have to pass method name of that class.
+    		  
+    		  <bean id = "stage" class = "..Stage.class" factory-method = "getInstance" />
+    		  
+    		           
+16. page 68 - Initializing and Destroying bean - >
+
+			  When bean is initializing it may need to perform some task to get into an usable state.when been is destroying it may need to perform some
+			  clean up task before destroying.
+			  
+			  for that <bean/> is having two attributes
+			  i) init-method
+			  ii)destroy-method
+			  
+			  <bean id="kenny" class="com.springinaction.springidol.Instrumentalist"
+									init-method="tuneInstrument" destroy-method="cleanInstrument">
+			  <property name="song" value="Jingle Bells" />
+		      <property name="instrument" ref="saxophone" />
+		      </bean>
+		      
+		      we have two handy attributes in <beans/> tag. We can set default attribute for all beans in the container if they have the same method name
+		      then it will perform init and destroy task.
+		      
+		      <?xml version="1.0" encoding="UTF-8"?>
+				<beans xmlns="http://www.springframework.org/schema/beans"
+					xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+					xsi:schemaLocation="http://www.springframework.org/schema/beans
+					http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
+					default-init-method="tuneInstrument"
+					default-destroy-method="cleanInstrument">
+					…
+				</beans>
+				
+17. InitializingBean and DisposableBean page 69 - > Its a special kind of Interface when a class implements this interface class needs to
+													override afterPropertiesSet() method and destroy() method.
+													And spring container confirms that it will perform init method after setting all of its properties.
+													
+													And in case of destroy method spring container confirms that after cleaning up task only bean destruction
+													will perform.
+													
+													But normally it is not recommended because it will create coupling.
+													
+													
+								 					
+								 					
+								 
+								 				 				 			   				    	 
 			    
 			   	
 
