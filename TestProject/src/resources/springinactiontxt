@@ -75,6 +75,8 @@
 					
 8. page 45 - > Constructor or setter injection: how do you choose?
 			 	
+			   > spring container resolves dependencies at the time of instantiation.
+			 	
 			   > Spring doesn't take side of either constructor or setter injection. We can also mix constructor and setter in a single bean.
 			     but I found when the dependencies are strict we can choose constructor di and when dependencies or properties are not
 			     fixed in object creation then we should go for setter injection.
@@ -337,11 +339,27 @@ page 76 - Abstracting common properties - >
 		  
 		  here basePerformer is a parent bean and it is an abstract bean. ant types of beans are extending it.
 		  
-2. page 78 - Applying method injection -> 
-		
+2. page 78 - Applying method injection ->
+
+			 i) method replacement - > Enables existing methods replacement with another method implementation runtime.
+			 						   In this case bean class should implement MethodReplacer class of spring framework and override
+			 						   reimplement() method.
+			 						   this method takes parameter the target object thats the method will be replaced on,
+			 						   							   method name
+			 						   							   argument passed to the method(if required)
+			 						   							   
+			 						   							   								 		 
+			 ii)getter Injection - >  Its special type of method injection where a a method declared(normally abstract method) to return certain types of bean.
+			 						  But the actual returned bean is configure in spring context.
+			 						  
 			 	 		  		      
-		        	
-								 					
+		     Method replacement is not allowed to change method signature.
+		     
+		     Method replacement is useful when A bean is singleton and its property bean is prototype then instead of dependent bean is prototype because of
+		     main bean singleton every time calling dependent bean it also return same bean every time.
+		     In this case if we want to get a new instance of dependent bean every time we then method injection is useful.
+		     
+		     
 								 
 								 				 				 			   				    	 
 			    
