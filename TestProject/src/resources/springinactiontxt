@@ -360,12 +360,118 @@ page 76 - Abstracting common properties - >
 		     In this case if we want to get a new instance of dependent bean every time we then method injection is useful.
 		     
 		     
-								 
-								 				 				 			   				    	 
-			    
-			   	
 
-			
-			   		   
-			     	 
-			   
+3. page 85 - Injecting non-Spring beans - >
+			 								 
+			 In this spring concept beans are configuring by spring and instantiated out side of the container.
+			 Spring configuration just plays a template or blue print of that bean.
+			 
+			 Here in configuration we have to make <bean/> abstract = "true"
+			 means we don't want to instantiate bean by spring.
+			 
+			 <bean id = "pianist" class = "..Instrumentalist" abstract = "true">
+			 	<property name = "song" value = "Too Too Too Too.."/>
+			 	<property name = "instrument">
+			 		<bean class = "..Piano"/>  					 				 				 			   				    	 
+			    </property>
+			 </bean>
+			 
+			 here pianist beans only serves a blue print of Intrumentalist that is created out side of the spring. With this blue print we need some
+			 way to associate it with Instrumentalist class
+			 and that is @Configurable
+			 
+			 @Configurable("pianist")
+			 class Instrumentalist {
+			 
+			 }
+			 
+			 @Configurable doing two things
+			 
+			 i)  Declaring this annotation spring we saying to spring that spring no need to instantiate this bean.
+			 	 It will be created in outside of spring container. 
+			 
+			 ii) It also associates the Instrumentalist class with bean whose Id is "pianist" and this bean
+			     will works as a template.
+			     
+			     
+4. page 89 - Registering custom property editors - >
+			 
+			 The java beans PropertyEditor Interface provides a means to customize how string values are mapped to non-string types.
+			 this interface hsa two methods getAsText() and setAsText()
+			 
+			 getAsText() - returns the string representation of property values
+			 
+			 setAsText(String str ) - sets a bean property value from the string to it.
+			 
+			 
+5. page 93 - Postprocessing beans - >
+
+			 useful to alter bean configuration	
+
+			 Spring offers two opportunities to cut into bean's life cycle process and review or alter bean configuration. This can be happen after
+			 occurring some events. This can postprocessing follows bean instantiation and configuration.
+			 
+			 BeanPostProcessor interface provides two methods to alter bean configuration.
+			 
+			 Object postProcessBeforeInitialization(Object bean, String name) throws BeansException
+			 
+			 Object postProcessAfterInitialization(Object bean, String name) throws BeansException
+			 
+			 The postProcessBeforeInitialization method calls prior to bean initialization
+			 and postProcessAfterInitialization method calls immediately after bean initialization. 
+
+ 			 >> Writing a bean postprocessor -
+ 			 
+ 			 Suppose need to alter all String properties of application to translate them into Elmer Fudd-speak.
+ 			 The Fuddifier class is doing just this
+ 			 
+ 			 public class Fuddifier implements BeanPostProcessor {
+ 			 
+ 			 	public Object postProcessAfterInitialization(Object bean, String name) throws BeansException{
+ 			 		
+ 			 		Field[] fields = bean.getClass().getDeclaredFields();
+ 			 		
+ 			 		try {
+ 			 			for(int i =0; i< fields.lemgth; i++){
+ 			 				
+ 			 				if(fields[i].getClass.equals(java.lang.String.calss)){
+ 			 					
+ 			 					fields[i].setAccsessable(true);
+ 			 					String original = (String)fields[i].get(bean);
+ 			 					fields[i].set(bean, fuddify(original));
+ 			 				}
+ 			 			
+ 			 			
+ 			 			}
+ 			 			
+ 			 		
+ 			 		}catch(IllegalAccessException e){
+ 			 			e.printStackTrace();
+ 			 		}
+ 			 		return bean;
+ 			 	}
+ 			 	
+ 			 	private String fuddify(String original){
+ 			 	
+ 			 		if(original == null) return original;
+ 			 		return orig.replaceAll("(r|l)", "w")
+					.replaceAll("(R|L)", "W");
+ 			 	}
+ 			 	
+ 			 	public Object postProcessBeforeInitialization(Object bean, String name) throws BenasException{
+ 			 	
+ 			 	
+ 			 		return bean;
+ 			 		
+ 			 	}
+ 			 	
+ 			 	
+ 			 }  
+			 
+			 >> Registering bean postprocessors - 
+			 
+			 
+			 
+			 
+			 //https://github.com/swarupmandal/programs.git
+			  	
