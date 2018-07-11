@@ -409,7 +409,19 @@ page 76 - Abstracting common properties - >
 			 useful to alter bean configuration	
 
 			 Spring offers two opportunities to cut into bean's life cycle process and review or alter bean configuration. This can be happen after
-			 occurring some events. This can postprocessing follows bean instantiation and configuration.
+			 occurring some events. This postProcessing follows bean instantiation and configuration.
+			 
+			 After spring container finishes configuring, instantiating and initializing we can implement some custom logic by plugging in
+			 one or more BeanPostProcessor implementation.We can implement multiple BeanPostProcessor and we can control the execution order
+			 of BeanPostProcessor by setting the order property BeanPostProcessor implements Order interface.
+			 
+			 The BeanPostProcessor operates on bean instances means after instantiated by spring container
+			 means after instantiating beans by container BeanPostProcessor starts working.  
+			 BeanPostProcessor is used to interact with beans after or before initialization method is invoked by Spring container.
+			 we can use BeanPostProcessor to execute custom logic after/before invoking initialization method by spring container.
+			 
+			 
+			 
 			 
 			 BeanPostProcessor interface provides two methods to alter bean configuration.
 			 
@@ -417,8 +429,13 @@ page 76 - Abstracting common properties - >
 			 
 			 Object postProcessAfterInitialization(Object bean, String name) throws BeansException
 			 
-			 The postProcessBeforeInitialization method calls prior to bean initialization
-			 and postProcessAfterInitialization method calls immediately after bean initialization. 
+			 The postProcessBeforeInitialization method calls prior to bean initialization invoked by container.
+			 and postProcessAfterInitialization method calls immediately after bean initialization by container. 
+
+			 BeanPostProcessor's methods takes the newly created bean and its name as arguments and returns same or modified bean.
+			 We can write BeanPostProcessor's in application context as other beans. After creating BeanPostProcessor object container will call
+			 each BeanPostProcessor's methods for each bean instance created by container.
+
 
  			 >> Writing a bean postprocessor -
  			 
@@ -468,10 +485,51 @@ page 76 - Abstracting common properties - >
  			 	
  			 }  
 			 
-			 >> Registering bean postprocessors - 
+			 >> Registering bean postprocessors -
 			 
+			 Example of spring's own BeanPostProcessor is ApplicationContextAwareProcessor. 
 			 
-			 
+			 	
+
+
+6. page no - 96 Externalizing configuration properties - >
+
+				PropertyPlaceholderConfigurer enables externalizing configuration values into property file and loading those values into placeholder
+				variables in spring context definition.
+				
+				
+7. page no - 99 Message Resolver - >
+
+			    ResourceBundleMessageResouce use to resolve messages.
+			    
+8. page no - 101 Decoupling with application events - >
+	
+				 In spring we can decouple object by dependency injection. There is another way to decouple objects using event publisher and event listener.
+				 In this way one bean can communicate with another bean with out knowing each other.
+				 Ex - One radio station is not connected directly through wired with each radio. and also it is unknown about which of the radio
+				 	  tuned with which station it is just publishing events and radios are listening that event.
+				 	  
+				 	  Any bean can be a event publisher or listener or both.
+				 	  
+				 
+				 
+				 	  
+				 	  							CHAPTER - 5
+				 	  						   -------------
+				 	  						   
+HITTING DATABASE - PAGE NO 155
+
+
+
+				 	  						   
+				 	  						   
+				 	  						   
+				 	  						   
+				 	  						   
+				 	  						   
+				 	   
+				 
+				  			 			    				
 			 
 			 //https://github.com/swarupmandal/programs.git
 			  	
