@@ -521,15 +521,32 @@ HITTING DATABASE - PAGE NO 155
 
 
 
-				 	  						   
-				 	  						   
-				 	  						   
-				 	  						   
-				 	  						   
-				 	  						   
-				 	   
-				 
-				  			 			    				
-			 
-			 //https://github.com/swarupmandal/programs.git
+1. page 165 - Configuring a data source - > 
+		
+			  i)  data sources that defined by JDBC Driver.
+			  ii) data sources that are looks up by JNDI.
+			  iii)data sources that defined in a connection pool.
+			  
+			  	
+
+2. Using JNDI data source - >
+			  
+			  Spring applications often deployed in jee application servers like jboss, webSphere or simple tomcat server. These servers allow us
+			  to configure data source through JNDI. The advantage of jndi data source is it is completely manageble from outside of the application
+			  and leaving application to simply ask for data source when it is completely ready for accessing databse.
+			  
+			  with spring we can configure a reference to a data source and that kept it in a JNDI and wire it to the class just like a simple
+			  spring bean.
+			  Spring's JNDIObjectFactoryBean makes it possible to retrieve any object including data source from JNDI and make it availvle
+			  as a spring bean.
+			  
+			  <bean id = "dataSource" value = "org.springframework.jndi.JNDIObjectFactoryBean" scope ="singleton">
+			  	<property name = "jndiname" value = "/jdbc/RantzDatasource"/>
+			  	<property name = "resourceRef" value = "true" />
+			  </bean>	 			  	
+
+
+
+
+//https://github.com/swarupmandal/programs.git
 			  	
