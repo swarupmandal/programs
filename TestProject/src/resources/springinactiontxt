@@ -529,7 +529,7 @@ HITTING DATABASE - PAGE NO 155
 			  
 			  	
 
-2. Using JNDI data source - >
+2. i) Using JNDI data source - >
 			  
 			  Spring applications often deployed in jee application servers like jboss, webSphere or simple tomcat server. These servers allow us
 			  to configure data source through JNDI. The advantage of jndi data source is it is completely manageble from outside of the application
@@ -541,12 +541,91 @@ HITTING DATABASE - PAGE NO 155
 			  as a spring bean.
 			  
 			  <bean id = "dataSource" value = "org.springframework.jndi.JNDIObjectFactoryBean" scope ="singleton">
-			  	<property name = "jndiname" value = "/jdbc/RantzDatasource"/>
+			  	<property name = "jndiName" value = "/jdbc/RantzDatasource"/>
 			  	<property name = "resourceRef" value = "true" />
 			  </bean>	 			  	
 
+			  The jndiName attribute used to specify the name of the resource in JNDI.If the jndiName property is set then data source looked up as is.
+			  If resourceRef set as true the value of jndiName will prepend with java:comp/env to retrieve data source as a java source from the
+			  application server's JNDI directory. Consequently, the actual name will be java:comp/env/jdbc/RantzDatasource.
+			  
+			  The jee namespace provides <jee:jndi-lookup> element for retrieving data from jndi. Following xml is serving the same task
+			  as JndiObjectFactoryBean.
+			  
+			  <jee:jndi-lookup id = "dataSource"
+			  jndi-name = "/jdbc/RantzDataSourec"
+			  resource-ref = "true" />
+			  
+			  
+			  
+	ii) Using a pooled data source - >
+              
+              If unable to retrieve datasource from JNDI then the best way is cofigure a pooled datasource directly in spring.Spring is not
+              provide pooled data source but we can have very handy apache jakarta database connection pools. we have to use jar file or
+              add meven dependency.
+              
+              <bean id="dataSource"
+					class="org.apache.commons.dbcp.BasicDataSource">
+					<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
+					<property name="url"
+					value="jdbc:hsqldb:hsql://localhost/roadrantz/roadrantz" />
+					<property name="username" value="sa" />
+					<property name="password" value="" />
+					<property name="initialSize" value="5" />
+					<property name="maxActive" value="10" />
+			  </bean>
+			  
+			  Here data source is proving by BasicDataSource. we have confugured with pooled datasource with 5 connection and 10 max active connecection.
+			   
+              
+	iii) JDBC driver-based data source - >
+		      
+		      The simpliest datasource we can configure in spring is one that is defined through a jdbc driver.spring provide two datasource classes
+		      in org.springframework.jdbc.datasource package.
+		      
+		      > DriverManagerDataSource - It provides everytime a new connection when a connection is requested. Unlike DBCP's BasicDataSource it is not
+		                                  a pooled connection.
+		                                  
+		      > SingleConnectionDataSource - It provides same connection everytime when a connection is requested.
+		      								 It acts as a connection pool of a single connection.
+		      
+		      Configuration either of classes is as same as DBCP's BasicDataSource.
+		      
+		      <bean id="dataSource"
+					class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+					<property name="driverClassName"
+					value="org.hsqldb.jdbcDriver" />
+					<property name="url"
+					value="jdbc:hsqldb:hsql://localhost/roadrantz/roadrantz" />
+					<property name="username" value="sa" />
+					<property name="password" value="" />
+			  </bean>
+			  
+			  The only difference is these classes not providing connection pooling, we don't need to add other configurations.
+			  
+			  Although these datasources are well for small application, being a single connection class SingleConnectionDataSource
+			  will not applicable for multithreaded environment.
+			  
+			  And though DriverManagerDataSource creates new connection on each request it incurs a performence cost on creating new connection
+			  each request. 
+			  Connection Pooling is recomended.
+			  
+			  								 
+		      								 
+3. page - 170 Using JDBC with Spring - >
+
+		      		      								 
+		      								                             
+		      
 
 
+
+			  
+			  
+
+			  
+			   			
+			  
 
 //https://github.com/swarupmandal/programs.git
 			  	
