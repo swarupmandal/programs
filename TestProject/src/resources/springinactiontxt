@@ -729,7 +729,61 @@ HITTING DATABASE - PAGE NO 155
 				mapRow() method takes three parameters sql, object array of parameter index based, RowMapper object that extract ta result from ResultSet.
 				
 				here the importaint is rowMap() method. For every row extracted by query rowMap() method will call. within that method we have to write
-				domain object population code, with that data getting from ResultSet. 
+				domain object population code, with that data getting from ResultSet.
+				
+				get value method is not having any resource management code and Exception handling code.
+				
+				
+				
+				> Using named parameters
+				
+				In case of index based there is a problem with parameters. During code we have to notice the sql parameter index every time if
+				any changes is there we have to chane the index also.
+				For that we have an option to avoid index based parameter is named base parameter.
+				Here we no need to notice the indexes of parameter and we can pass values through name.
+				
+				But Jdbc template is not providing this facility. The NamedParameterJdbcTemplate is providing this facility.
+				And it is not extends from JdbcTemplate we have to change configuration and classes.
+				
+				<bean id="jdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
+					<property name="dataSource" ref="dataSource" />
+				</bean>
+				
+				private static final String MOTORIST_INSERT =" insert into motorist (id, email, password, " +
+															 " firstName, lastName) " +
+															 " values (null, :email, :password, :firstName, :lastName)";
+															 
+				
+				public class JdbcRantDao implements RantDao {
+					private NamedParameterJdbcTemplate jdbcTemplate;
+					public void setJdbcTemplate(NamedParameterJdbcTemplate jdbcTemplate) {
+					this.jdbcTemplate = jdbcTemplate;
+										
+					}
+				
+				
+				public void saveMotorist(Motorist motorist) {
+				
+						Map parameters = new HashMap();
+						parameters.put("email", motorist.getEmail());
+						parameters.put("password", motorist.getPassword());
+						parameters.put("firstName", motorist.getFirstName());
+						parameters.put("lastName", motorist.getLastName());
+						jdbcTemplate.update(MOTORIST_INSERT, parameters);
+				
+					}
 
+				}
+				
+				we have to use map to use named parameter.
+				
+				
+				
+				
+				> Simplifying JDBC in Java 5
+				
+				
+				
+				
 //https://github.com/swarupmandal/programs.git
 			  	
