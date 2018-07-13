@@ -614,14 +614,83 @@ HITTING DATABASE - PAGE NO 155
 		      								 
 3. page - 170 Using JDBC with Spring - >
 
-		      		      								 
-		      								                             
 		      
-
-
-
+		      using jdbc with spring allow us to work and having control on all operations. but one very big problem is we have to write much code
+		      and need to handle all operations from connection open to close, resource management, transaction, exception handling.
+		      		      								 
+		      
+4. page - 174 Working with JDBC templates - >
+				
+			  Spring's JDBC framework souldering the burden of resource management and Exception handling. This leavs you free write codes to move
+			  data from and to database.
+			  Spring abstract the boiler plate code behind template classes. Spring provides three types of jdbc template classes
 			  
+			  i)   JdbcTemplate - It provides simple access to database through jdbc connection and simple indexed base parameter sql.
 			  
+			  ii)  NamedParmeterJdbcTemplate - It enables to perform queries where values are bound to named parameter.
+			  
+			  iii) SimpleJdbcTemplate - This version of jdbc template uses java 5 features and varible parameters  lists to simplify how
+			       a jdbc template is used.
+			       
+			  Which one will be choosen is largely a matter of performence.     
+			  
+
+			  > Accessing data using JdbcTemplate
+			  
+			  All a JDBC template needs to do its work is DataSource.
+			  It is easy to configure jdbc template in spring xml as a bean.
+			  
+			  <bean id="dataSource"
+					class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+					<property name="driverClassName"
+					value="org.hsqldb.jdbcDriver" />
+					<property name="url"
+					value="jdbc:hsqldb:hsql://localhost/roadrantz/roadrantz" />
+					<property name="username" value="sa" />
+					<property name="password" value="" />
+			  </bean>
+			  
+			  <bean id = "jdbcTemplate" class = "org.springframework.jdbc.core.JdbcTemplate">
+			  	<property name = "datasource" ref = "dataSource"/>
+			  </bean>	
+			   
+			  datasource property can be any implementation of javax.sql.DataSource.
+			  
+			  now we can write JdbcTemplate in our Dao class.
+			  
+			  public class JdbcRantDao implements RantDao {
+			  
+			  private JdbcTemplate jdbcTemplate;
+			  
+			  .
+			  .
+			  .
+			  
+			  public void setJdbcTemplate(JdbcTemplate jdbcTemplate){
+			  		
+			  		this.jdbcTemplate = jdbcTemplate;			  		
+			  
+			  }
+			  
+			  }
+
+
+			  <bean id = "rantDao" class ="..JdbcRantDao" >
+			  	<property name = "jdbcTemplate" ref = "jdbcTemplate"/>
+			  </bean>
+			  
+			  with jdbc template the db operation is like this
+			  
+			  private static final String MOTORIST_INSERT =
+					"insert into motorist (id, email, password, " +
+					"firstName, lastName) " +
+					"values (null, ?,?,?,?)";
+					
+					public void saveMotorist(Motorist motorist) {
+					jdbcTemplate.update(MOTORIST_INSERT,
+					new Object[] { motorist.getEmail(),motorist.getPassword(),
+					motorist.getFirstName(), motorist.getLastName() });
+			  }
 
 			  
 			   			
