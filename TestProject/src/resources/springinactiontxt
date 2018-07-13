@@ -687,14 +687,49 @@ HITTING DATABASE - PAGE NO 155
 					"values (null, ?,?,?,?)";
 					
 					public void saveMotorist(Motorist motorist) {
-					jdbcTemplate.update(MOTORIST_INSERT,
-					new Object[] { motorist.getEmail(),motorist.getPassword(),
+					
+					jdbcTemplate.update(MOTORIST_INSERT, new Object[] { motorist.getEmail(),motorist.getPassword(),
 					motorist.getFirstName(), motorist.getLastName() });
 			  }
 
 			  
-			   			
+			  Here no need to create connection, no need to handle exception. Here connection creation, statement creation and execution is
+			  hidden by JdbcTemplate.
+			  JdbcTemplate catches the exceptions converts into more specific data access exception and re throws. All are runtime exceptions.
 			  
+			  Reading data also very simple in JdbcTemplate. It uses jdbc callbacks to map resultsets with domain object.
+			  
+			  
+			  private static final String MOTORIST_SELECT = "select id, email, password, firstName, lastName from motorist";
+			  
+					private static final String MOTORIST_BY_ID_SELECT = MOTORIST_SELECT + " where id=?";
+					
+					public Motorist getMotoristById(long id) {
+					
+					List matches = jdbcTemplate.query(MOTORIST_BY_ID_SELECT,new Object[] { Long.valueOf(id) },new RowMapper() {
+					
+					               public Object mapRow(ResultSet rs, int rowNum) throws SQLException, DataAccessException {
+					
+								   Motorist motorist = new Motorist();
+								   motorist.setId(rs.getInt(1));
+								   motorist.setEmail(rs.getString(2));
+								   motorist.setPassword(rs.getString(3));
+								   motorist.setFirstName(rs.getString(4));
+								   motorist.setLastName(rs.getString(5));
+								   
+								return motorist;
+								}
+					});
+					
+					return matches.size() > 0 ? (Motorist) matches.get(0) : null;
+				}
+				
+				
+				
+				mapRow() method takes three parameters sql, object array of parameter index based, RowMapper object that extract ta result from ResultSet.
+				
+				here the importaint is rowMap() method. For every row extracted by query rowMap() method will call. within that method we have to write
+				domain object population code, with that data getting from ResultSet. 
 
 //https://github.com/swarupmandal/programs.git
 			  	
