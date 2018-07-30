@@ -782,8 +782,55 @@ HITTING DATABASE - PAGE NO 155
 				
 				> Simplifying JDBC in Java 5
 				
-				
-				
+				  This is taking advantages of java 5 varargs and generics and using SimpleJddbcTemplate.
+				  
+				  <bean id="jdbcTemplate" class="org.springframework.jdbc.core.simple.SimpleJdbcTemplate">
+						<property name="dataSource" ref="dataSource" />
+				  </bean>
+				  
+				  public class JdbcRantDao implements RantDao {
+					…
+					private SimpleJdbcTemplate jdbcTemplate;
+					public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
+					this.jdbcTemplate = jdbcTemplate;
+					}
+				  }
+				  
+				  public void saveMotorist(Motorist motorist) {
+				  
+					jdbcTemplate.update(MOTORIST_INSERT, motorist.getEmail(), motorist.getPassword(), motorist.getFirstName(), motorist.getLastName());
+					
+				  }
+					
+				 The save method is not like JdbcTemplate save method instead its is of simplejdbc templete which take advantages of java 5.
+				 
+				 >> here we no need to convert the data types
+				 >> RowMapper is generic we can work with specific class
+				 
+				 
+				 
+				 public Motorist getMotoristById(long id) {
+						List<Motorist> matches = getSimpleJdbcTemplate().query(
+						MOTORIST_BY_ID_SELECT,
+						new ParameterizedRowMapper<Motorist>() {
+								public Motorist mapRow(ResultSet rs, int rowNum)
+								throws SQLException {
+								Motorist motorist = new Motorist();
+								motorist.setId(rs.getInt(1));
+								motorist.setEmail(rs.getString(2));
+								motorist.setPassword(rs.getString(3));
+								motorist.setFirstName(rs.getString(4));
+								motorist.setLastName(rs.getString(5));
+								return motorist;
+								}
+							},
+							id
+						);
+						return matches.size() > 0 ? matches.get(0) : null;
+				  }
+				  
+				   
+				  
 				
 //https://github.com/swarupmandal/programs.git
 			  	
