@@ -830,7 +830,87 @@ HITTING DATABASE - PAGE NO 155
 				  }
 				  
 				   
-				  
+    >>>> Writting a JDBC based dao involves configuring three bean as configuring Jdbc template bean, writting it into a dao and using the template for accessing
+         
+         Databse. for that we have to write three beans.Data source, a template and a dao.
+         
+    NOW WE WILL SEE HOW SPRING WORKS WITH JDBC AND CUT OFF THESE MUCH OF BEAN CREATION IN XML CONFIGURATION      
+         
+Page 180 - Using Spring Dao Support classes for JDBC
+
+		   Here we have a parent JdbcDaoSupport and all dao classes will be inherit this class to get jdbcTemplate object which is defined in
+		   
+		   JdbcDaoSupport Class as a dataSource. and it will provide getJdbcTemplate() method to access JdbcTemplate object.
+		    	
+
+           <bean id="rantDao" class="com.roadrantz.dao.jdbc.JdbcRantDao">
+				<property name="dataSource" ref="dataSource" />
+		   </bean>
+		
+		
+		   Here we are passing a datasource ref instead of jdbc template, and as JdbcRantDao extends JdbcDaoSupport and datasource internally will create
+		   JdbcTemplate instance.
+		   
+		   public class JdbcRantDao extends JdbcDaoSupport implements RantDao {
+
+				public void saveMotorist(Motorist motorist) { getJdbcTemplate().update(MOTORIST_INSERT, new Object[] { motorist.getEmail(), motorist.getPassword(),
+				
+				motorist.getFirstName(), motorist.getLastName() });
+				
+				}
+
+		   }
+		   
+		   
+		   >> Jdbc Dao support for named parameter insteade of indexed parameters.
+		   
+		      For named parameter jdbc dao support has a class NamedPArameterJdbcDaoSupport. which is having getNamedParameterJdbcDaoSupport() method.
+		      When we use NamedParameterJdbcDaoSupport the paramters mapped into the query java.util.Map object.
+		      
+		      public class JdbcRantDao extends NamedParameterJdbcDaoSupport implements RantDao {
+		       
+		   			public void saveMotorist(Motorist motorist) {
+		   			
+						Map parameters = new HashMap();
+						parameters.put("email", motorist.getEmail());
+						parameters.put("password", motorist.getPassword());
+						parameters.put("firstName", motorist.getFirstName());
+						parameters.put("lastName", motorist.getLastName());
+						getNamedParameterJdbcTemplate().update(
+						MOTORIST_INSERT, parameters);
+						
+						}
+								   
+		   	  }
+		   	  
+Page - 182 > Simplified java 5 dao
+
+			 To use the java 5 features on JdbcDaoSupport we have to use SimpleJdbcDaoSupport.
+			 
+			 public class JdbcRantDao extends SimpleJdbcDaoSupport implements RantDao {
+			 
+				public void saveMotorist(Motorist motorist) {
+				getSimpleJdbcTemplate().update(MOTORIST_INSERT,
+				motorist.getEmail(), motorist.getPassword(),
+				motorist.getFirstName(), motorist.getLastName());
+				
+				}
+			
+			 }
+			 
+			 >>>>>>>>> Learn Jdbc Template and details of jdbc utils from internal java code
+			 
+			 
+Page - 183 > Integrating Hibernate with Spring
+
+			 As for normal and small application jdbc template is good but for large and complex application jdbc not recomanded.  
+
+			 
+
+			 
+			 		   	  
+		     		
+		   	         
 				
 //https://github.com/swarupmandal/programs.git
 			  	

@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.ParseException;
+import java.util.ArrayList;
 
 public class Test {
 
@@ -66,4 +67,35 @@ public class Test {
 	    Files.copy(source, destination, StandardCopyOption.REPLACE_EXISTING);
 	}
 
+	public void filterTest(){
+		
+		String val;
+		
+		ArrayList<Student> list = new ArrayList<Student>();
+		
+		Student student;
+		
+		student = new Student(1, "ABC", 10);
+		list.add(student);
+		
+		student = new Student(2, "AB", 10);
+		list.add(student);
+		
+		
+		student = new Student(3, "EF", 10);
+		list.add(student);
+		
+		
+		student = new Student(4, "XYZ", 10);
+		list.add(student);
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
 }

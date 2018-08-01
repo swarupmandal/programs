@@ -4,13 +4,13 @@ public class Patterns {
 
 	public static void main(String[] args) {
 
-		pattern15();
+		pattern1();
 	}
 
 	public static void pattern1() {
 
 		int c = 1;
-		int n = 15;
+		int n = 10;
 
 		for (int i = 1; i <= n; i++) {
 

@@ -21,9 +21,9 @@ public class CTest {
 		
 		//int[] arr = { 25, 1, 65, 5, 12, 7, 22, 11, 8, 27, 9, 10, 12, 24 };
 		int[] arr = {9, 10, 11, 12, 22, 24, 25, 27, 65};
-		int i =binarySearch(0, arr.length-1, arr);
+		//int i =binarySearch(0, arr.length-1, arr);
 		
-		System.out.println("I > " +i);
+		//System.out.println("I > " +i);
 		
 		long end = System.nanoTime();
 		System.out.println(end -start);
@@ -211,9 +211,9 @@ public class CTest {
 			rorate(arr);
 		}
 		
-		/*for(int i=0; i<arr.length; i++){
+		for(int i=0; i<arr.length; i++){
 			System.out.print(arr[i]+" ");
-		}*/
+		}
 	}
 	public static void rorate(int[] arr){
 		System.out.println("LENTH 1 > " + arr.length);
