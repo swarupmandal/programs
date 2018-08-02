@@ -903,8 +903,20 @@ Page - 182 > Simplified java 5 dao
 			 
 Page - 183 > Integrating Hibernate with Spring
 
-			 As for normal and small application jdbc template is good but for large and complex application jdbc not recomanded.  
+			 As for normal and small application jdbc template is good but for large and complex application Jdbc Template is not recomanded.  
 
+			 Lazy Loading - As our object graph becomes more complex, we sometimes don't want to fetch entire object graphs. That is allows by
+			 				hibernate in the term of Lazy Loading.
+			 				If an Order having list of Items and we need only Order class then fetching order and its all items is not a good
+			 				thinking by lazy loading we can fetch only required object.
+			 				
+			 Eager Fetching - Eager Fetching is allows us to fetch complete object graph by a single query.
+			 
+			 Cascading - Somtimes updateing one database is also require to update its relational table. In case of object relational mapping
+			 			 when on entity class object is updating then its associated entity class object will also updating by using
+			 			 Cascading.
+			 			 
+			 >> The main Interface to interacting with hibernate is org.hibernate.Session.			 				  
 			 
 
 			 
