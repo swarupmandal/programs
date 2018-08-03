@@ -923,8 +923,55 @@ Page - 183 > Integrating Hibernate with Spring
 			    Among other things SessoinFactory is responsible for opening and closing and managing Hibernate Session.
 			    
 			    Jdbc template is working in spring as a templte which takes responsibility to manage connections creatring sql and much of jdbc
-			    task. For Hibernate also Spring is having HibernateTemplate for providing abstruction support for Hibernate. 
-		   	         
+			    task. For Hibernate also Spring is having HibernateTemplate for providing support for Hibernate. It provides an abstraction layer
+			    for Hibernate Session.The main responsibility of HibernateTemplate is opening and closing Hibernate Session and converts the Hibernate
+			    Exception to Spring ORM Exceptions.
+			    
+			    <bean id="hibernateTemplate"class="org.springframework.orm.hibernate3.HibernateTemplate">
+					<property name="sessionFactory" ref="sessionFactory" />
+				</bean>
+				
+				The SessionFactory property takes one of the implementation of SessionFactory Interface.
+				Here we have few options that depends on how we use Hibernate to map our Objects to database tables.
+				
+				i) Using Classic Hibernate mappings xml -
+				
+				   If we are using Hibernates's classic xml file mapping then we have to use LocalSessionFactoryBean. It produces local SessionFactory object
+				   and draws its mapping meta data from several xml mapping files. LocalSessionFactoryBean that loads mapping files to produce a SessionFactory
+				   object.
+				   
+												 HIBERNATE            LOCAL                   HIBERNATE SESSION  
+												 MAPPING   -------->  SESSIONFACTORY -------> FACTORY
+												 FILES                BEAN					OBJECT				
+				
+				
+				   <bean name = sessionFactory class = "org.sp.orm.hibernate3.LocalSessionFactoryBean">
+				   		 <property name = "dataSource" ref = "dataSource"/>
+				   		 <property name = "mappingResources">
+				   		  	<list>
+				   		  		<value>..vehicle.hbm.xml</value>
+				   		  		<value>..animal.hbm.xml</value>
+				   		  		<value>..emplyee.hbm.xml</value>
+		   	         		</list>
+		   	         	 </property>
+		   	         	 <property name = "hibernateMappings">
+		   	         	 	<props>
+		   	         	 		<prop key="hibernate.dialect">${hibernate.dialect}</prop>
+		   	         	 	</props>
+		   	         	 </property>
+		   	       </bean>
+		   	        
+		   	        > datasource property refers to datasource objects
+		   	        > mappingResources is taking one or more xml file path which is the entity object of each tables.
+		   	        > hibernatemappings is configuring multiple properties of hibernate
+		   	        
+		   	        
+		   	     ii) WORKING WITH ANNOTATED DOMAIN OBJECT
+		   	        
+		   	         If we want to use java 5 and its annotations then we have to use all domain classes with annotation to tag domain objects with persistance
+		   	         metatdata. 
+		   	        
+		   	        	 			
 				
 //https://github.com/swarupmandal/programs.git
 			  	
