@@ -916,12 +916,14 @@ Page - 183 > Integrating Hibernate with Spring
 			 			 when on entity class object is updating then its associated entity class object will also updating by using
 			 			 Cascading.
 			 			 
-			 >> The main Interface to interacting with hibernate is org.hibernate.Session.			 				  
-			 
-
-			 
-			 		   	  
-		     		
+			 >> The main Interface to interacting with hibernate is org.hibernate.Session. The basic database operations like save, update, delete
+			    and load objects from database. It is through the hibernate Session that all the dao class uses its all persistance operations.
+			    
+			    The standard way to get reference of Hibernate Session is to use the implementation object of hiberate SessionFactory Interface.
+			    Among other things SessoinFactory is responsible for opening and closing and managing Hibernate Session.
+			    
+			    Jdbc template is working in spring as a templte which takes responsibility to manage connections creatring sql and much of jdbc
+			    task. For Hibernate also Spring is having HibernateTemplate for providing abstruction support for Hibernate. 
 		   	         
 				
 //https://github.com/swarupmandal/programs.git
