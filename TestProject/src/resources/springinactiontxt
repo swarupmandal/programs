@@ -942,7 +942,7 @@ Page - 183 > Integrating Hibernate with Spring
 				   
 												 HIBERNATE            LOCAL                   HIBERNATE SESSION  
 												 MAPPING   -------->  SESSIONFACTORY -------> FACTORY
-												 FILES                BEAN					OBJECT				
+												 FILES                BEAN					  OBJECT				
 				
 				
 				   <bean name = sessionFactory class = "org.sp.orm.hibernate3.LocalSessionFactoryBean">
@@ -969,9 +969,85 @@ Page - 183 > Integrating Hibernate with Spring
 		   	     ii) WORKING WITH ANNOTATED DOMAIN OBJECT
 		   	        
 		   	         If we want to use java 5 and its annotations then we have to use all domain classes with annotation to tag domain objects with persistance
-		   	         metatdata. 
+		   	         metatdata.
+		   	         
+						   	         Annotated				 Annotation					 Hibernate	
+						   	         Domain     ---------->  SessionFactory --------->  SessionFactory
+						   	         class					 Bean 	
 		   	        
+		   	     
+		   	         AnnotationSessionFactory produces HibernateSessionFactory by reading one or more domain classes with annotation. Hibernate3 supports both
+		   	         Hibernate and JPA based annotations. And AnnotationSessionFactoryBean and LocalSessionFactoryBean works same manners only its creates
+		   	         SessionFactory based on annotated domain class.
+		   	         
+		   	         <bean id="sessionFactory"
+						class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+						<property name="dataSource" ref="dataSource" />
+						  <property name="annotatedClasses">
+						    <list>
+						      <value>com.roadrantz.domain.Rant</value>
+						      <value>com.roadrantz.domain.Motorist</value>
+						      <value>com.roadrantz.domain.Vehicle</value>
+						    </list>
+						</property>
+						  <property name="hibernateProperties">
+						    <props>
+						      <prop key="hibernate.dialect">${hibernate.dialect}</prop>
+						    </props>
+						</property>
+					</bean>
+					
+					Here we have to pass one or more annotated class apert from that other things are same.
+					
+			 	
+			 	
+			 	iii) ACCESSING DATA THROUGH THE HIBERNATE TEMPLATE
+			 	
+			 		 With HibernateTemplate bean we can configure and wired with a hibernate session factory to connect with database and persist
+			 		 objects.
+			 		 
+			 		 public class HibernateRantDao implements RantDao {
+			 		 	
+			 		 	public HibernateTemplate hibernateTemplate;
+			 		 	
+			 		 	...
+			 		 	
+			 		 	public void setHibernateTemplate(HibernateTemplate hibernateTemplate){
+			 		 		
+			 		 		this.hibernateTemplate = hibernateTemplate;
+			 		 	
+			 		 	}			 		 
+			 		 
+			 		 }
+			 		 
+			 		 Here we are injecting HibernateTemplate in HibernateRantDao.
+			 		 
+			 		 <bean id = hibernateRantDao class = ..HibernateRantDao>
+			 		 	<property name = "hibernateTemplate" ref = hibernateTemplate/>
+			 		 </bean>
+			 		 
+			 		 we can use to store objects using saveOrUpdate() method of HibernateTemplate class.
+			 		 
+			 		 public void save(Vehicle vehicle){
+			 		 
+			 		 	hibernateTemplate.saveOrUpdate(vehicle);
+			 		 
+			 		 }	     
 		   	        	 			
+					 HibernateTemplate provides several methods like hibernate.
+					 
+					 public Vehicle findByPlateNumber(String state, StringplateName){
+					 
+					 	List result = hibernateTemplate.find("from " + VEHICLE + "where state = ? and plateNumber = ? ", new Object[] {state, plateNumber});
+					 	
+					 	return result.size > 0 ? (VEHICLE)list.get(0) : null;
+					 }
+					 
+					 public Motorist getMotoristById(Long id){
+					 	return (Motorist) hibernateTemplate.load(Motorist.Class, id);
+					 	
+					 } 	
+					
 				
 //https://github.com/swarupmandal/programs.git
 			  	
