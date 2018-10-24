@@ -186,16 +186,16 @@
    			 
    			 Autowiring by constructor shares the same limitations as byType. That is,
 			 Spring will not attempt to guess which bean to autowire when it finds multiple
-			 beans that match a constructor’s arguments. Furthermore, if a constructor has
+			 beans that match a constructorï¿½s arguments. Furthermore, if a constructor has
 			 multiple constructors, any of which can be satisfied by autowiring, Spring will not
 		     attempt to guess which constructor to use.
    			 
    			 Autodetect autowiring
    			 
-   			 If you want to autowire your beans, but you can’t decide which type of autowiring
+   			 If you want to autowire your beans, but you canï¿½t decide which type of autowiring
 			 to use, have no fear. By setting the autowire attribute to autodetect.
 			 When a bean has been configured to autowire by autodetect, Spring will attempt
-		     to autowire by constructor first. If a suitable constructor-bean match can’t be
+		     to autowire by constructor first. If a suitable constructor-bean match canï¿½t be
              found then Spring will attempt to autowire by type
    			 
    			 			
@@ -270,7 +270,7 @@
 					http://www.springframework.org/schema/beans/spring-beans-2.0.xsd"
 					default-init-method="tuneInstrument"
 					default-destroy-method="cleanInstrument">
-					…
+					ï¿½
 				</beans>
 				
 17. page 69 - InitializingBean and DisposableBean - > Its a special kind of Interface when a class implements this interface class needs to
@@ -789,7 +789,7 @@ HITTING DATABASE - PAGE NO 155
 				  </bean>
 				  
 				  public class JdbcRantDao implements RantDao {
-					…
+					ï¿½
 					private SimpleJdbcTemplate jdbcTemplate;
 					public void setJdbcTemplate(SimpleJdbcTemplate jdbcTemplate) {
 					this.jdbcTemplate = jdbcTemplate;
@@ -1048,6 +1048,15 @@ Page - 183 > Integrating Hibernate with Spring
 					 	
 					 } 	
 					
+
+
+5.4.3
+Page No - > 191 Building Hibernate-backed DAOs
+
+					
+
+
+
 				
 //https://github.com/swarupmandal/programs.git
 			  	
